@@ -33,6 +33,7 @@ jobs:
       run: |
         pwd
         ls -al
+        export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
         cd examples/batchMode
         ./pytestQuick.sh
 
