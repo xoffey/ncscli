@@ -45,6 +45,12 @@ def check_batchRunner_example( exampleName, frameFilePattern=None ):
 def test_authToken():
     assert os.getenv('NCS_AUTH_TOKEN'), 'env var NCS_AUTH_TOKEN not found'
 
+def test_import():
+    import ncs
+
+def test_path():
+    subprocess.check_call( 'ncs.py --version', shell=True )
+
 def test_runBatchBinary():
     # check if the built ARM executable already exists
     if not os.path.isfile('helloFrame_aarch64'):
