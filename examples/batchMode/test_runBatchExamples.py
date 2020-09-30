@@ -7,6 +7,9 @@ import re
 import sys
 import subprocess
 
+import pytest
+
+
 def check_batchRunner_results( jlogFilePath ):
     with open( jlogFilePath, 'r') as inFile:
         for line in inFile:
@@ -54,6 +57,7 @@ def test_import():
 def test_path():
     subprocess.check_call( 'ncs.py --version', shell=True )
 
+@pytest.mark.xfail
 def test_runBatchBinary():
     # check if the built ARM executable already exists
     if not os.path.isfile('helloFrame_aarch64'):
@@ -66,6 +70,7 @@ def test_runBatchBinary():
 
     check_batchRunner_example( 'runBatchBinary', 'frame_*.out' )
 
+@pytest.mark.xfail
 def test_runBatchBinaryGo():
     # check if the built ARM executable already exists
     if not os.path.isfile('helloFrameGo_aarch64'):
