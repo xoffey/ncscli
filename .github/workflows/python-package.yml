@@ -35,7 +35,7 @@ jobs:
         ls -al
         echo PYTHONPATH $PYTHONPATH
         export PYTHONPATH=$PWD'/ncscli':$PWD'/ncscli/ncscli'
-        export PATH=$PWD'/ncscli':$PATH
+        export PATH=$PWD:$PWD'/ncscli':$PATH
         export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
         cd examples/batchMode
         ./pytestQuick.sh
