@@ -4,7 +4,11 @@ import glob
 import json
 import os
 import re
+import sys
 import subprocess
+
+import pytest
+
 
 def check_batchRunner_results( jlogFilePath ):
     with open( jlogFilePath, 'r') as inFile:
@@ -27,6 +31,8 @@ def check_batchRunner_example( exampleName, frameFilePattern=None ):
     binPath = './' + exampleName + '.py'
     proc = subprocess.run( [binPath], stderr=subprocess.PIPE )
     rc = proc.returncode
+    if rc:
+        print( proc.stderr.decode('utf-8'), file=sys.stderr )
     assert rc==0, exampleName+' returned non-zero rc'
     stderr = proc.stderr.decode('utf-8')
     assert 'args.outDataDir' in stderr, 'no args.outDataDir in stderr'
@@ -45,6 +51,13 @@ def check_batchRunner_example( exampleName, frameFilePattern=None ):
 def test_authToken():
     assert os.getenv('NCS_AUTH_TOKEN'), 'env var NCS_AUTH_TOKEN not found'
 
+def test_import():
+    import ncs
+
+def test_path():
+    subprocess.check_call( 'ncs.py --version', shell=True )
+
+@pytest.mark.xfail
 def test_runBatchBinary():
     # check if the built ARM executable already exists
     if not os.path.isfile('helloFrame_aarch64'):
@@ -57,6 +70,7 @@ def test_runBatchBinary():
 
     check_batchRunner_example( 'runBatchBinary', 'frame_*.out' )
 
+@pytest.mark.xfail
 def test_runBatchBinaryGo():
     # check if the built ARM executable already exists
     if not os.path.isfile('helloFrameGo_aarch64'):
