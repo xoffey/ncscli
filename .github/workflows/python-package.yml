@@ -40,10 +40,10 @@ jobs:
         export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
         cd examples/batchMode
         ./pytestQuick.sh
-    - name: Upload pytest test results
+    - name: Upload output data as artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: pytest-results-${{ matrix.python-version }}
-        path: examples/batchMode/data/pytest.xml
+        name: batchExamples-data-${{ matrix.python-version }}
+        path: examples/batchMode/data
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
