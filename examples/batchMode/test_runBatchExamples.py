@@ -51,8 +51,9 @@ def check_batchRunner_example( exampleName, frameFilePattern=None ):
 def test_authToken():
     assert os.getenv('NCS_AUTH_TOKEN'), 'env var NCS_AUTH_TOKEN not found'
 
-def test_import():
-    import ncs
+def test_imports():
+    import ncscli
+    import ncscli.batchRunner
 
 def test_path():
     subprocess.check_call( 'ncs.py --version', shell=True )
