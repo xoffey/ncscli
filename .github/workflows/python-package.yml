@@ -36,8 +36,8 @@ jobs:
         ls -al
         ssh-keygen -q -f ~/.ssh/id_rsa -t rsa -N ''
         echo PYTHONPATH $PYTHONPATH
-        export PYTHONPATH=$PWD:$PWD'/ncscli':$PWD'/ncscli/ncscli'
-        export PATH=$PWD:$PWD'/ncscli':$PATH
+        export PYTHONPATH=$PWD
+        export PATH=$PWD:$PATH
         export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
         cd examples/batchMode
         ./pytestQuick.sh
