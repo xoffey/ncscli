@@ -31,6 +31,8 @@ jobs:
         pip install requests>=2.12.4, asyncssh>=1.16.1, matplotlib
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
+      env:
+        NCS_AUTH_TOKEN: ${{ secrets.NCS_AUTH_TOKEN }}
       run: |
         pwd
         ls -al
@@ -38,7 +40,7 @@ jobs:
         echo PYTHONPATH $PYTHONPATH
         export PYTHONPATH=$PWD
         export PATH=$PWD'/ncscli':$PATH
-        export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
+        #export NCS_AUTH_TOKEN=VnvnwNggQz7NDEeMJQQmDfdS85Jjzs4g
         cd examples/batchMode
         ./pytestQuick.sh
     - name: Upload output data as artifacts
